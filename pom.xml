@@ -1,0 +1,163 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.airtel.kafka.storm</groupId>
+  <artifactId>integration</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+  		<java.version>1.8</java.version>
+		<storm.version>1.0.1</storm.version>
+		<kafka.version>0.8.2.2</kafka.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<!-- <build>
+	<plugins>
+	<plugin>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <configuration>
+      <descriptorRefs>  
+        <descriptorRef>jar-with-dependencies</descriptorRef>
+      </descriptorRefs>
+      <archive>
+        <manifest>
+          <mainClass>com.airtel.prod.engg.integrate.KafkaStormIntegrationDemo.Class</mainClass>
+        </manifest>
+      </archive>
+    </configuration>
+  </plugin>
+  </plugins>
+  </build> -->
+	
+	<dependencies>
+	 <dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.6.2</version>
+</dependency> 
+		<!-- Storm library -->
+		<dependency>
+			<groupId>org.apache.storm</groupId>
+			<artifactId>storm-core</artifactId>
+			<version>${storm.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+	                    <groupId>org.slf4j</groupId>
+	                    <artifactId>log4j-over-slf4j</artifactId>
+	                </exclusion>
+	                <exclusion>
+	                    <groupId>org.slf4j</groupId>
+	                    <artifactId>slf4j-api</artifactId>
+	                </exclusion>
+	                <exclusion>
+	                    <groupId>logback-classic</groupId>
+	                    <artifactId>ch.qos.logback</artifactId>
+	                </exclusion>
+                </exclusions>
+		</dependency>
+		<!-- Storm-Kafka integration library -->
+		<dependency>
+			<groupId>org.apache.storm</groupId>
+			<artifactId>storm-kafka</artifactId>
+			<version>${storm.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.kafka</groupId>
+  					<artifactId>kafka-clients</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- Kafka client libraries as Storm-Kafka integration library does not include these -->
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.11</artifactId>
+			<version>${kafka.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<!-- Excluded to avoid version issues between Kafka zookeeper api and 
+					Storm-kafka zookeeper api -->
+				<exclusion>
+					<groupId>org.apache.zookeeper</groupId>
+					<artifactId>zookeeper</artifactId>
+				</exclusion>
+				<!-- Excluded to avoid Pre-emptive StackOverflowException due to version/implementation 
+					issues between Kafka slf4j/log4j api and Storm slf4j/log4js api -->
+				<!-- <exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion> -->
+				<!-- <exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion> -->
+				<exclusion>
+	                    <groupId>org.slf4j</groupId>
+	                    <artifactId>log4j-over-slf4j</artifactId>
+	                </exclusion>
+	                <exclusion>
+	                    <groupId>org.slf4j</groupId>
+	                    <artifactId>slf4j-api</artifactId>
+	                </exclusion>
+	                <exclusion>
+	                    <groupId>logback-classic</groupId>
+	                    <artifactId>ch.qos.logback</artifactId>
+	                </exclusion>
+				<exclusion>
+					<groupId>org.apache.kafka</groupId>
+  					<artifactId>kafka-clients</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+  					<artifactId>kafka-clients</artifactId>
+  					<version>0.9.0.1</version>
+  					<exclusions>
+				<exclusion>
+	                    <groupId>org.slf4j</groupId>
+	                    <artifactId>log4j-over-slf4j</artifactId>
+	                </exclusion>
+	                <exclusion>
+	                    <groupId>org.slf4j</groupId>
+	                    <artifactId>slf4j-api</artifactId>
+	                </exclusion>
+	                <exclusion>
+	                    <groupId>logback-classic</groupId>
+	                    <artifactId>ch.qos.logback</artifactId>
+	                </exclusion>
+                </exclusions>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.aerospike/aerospike-client -->
+		<dependency>
+		    <groupId>com.aerospike</groupId>
+		    <artifactId>aerospike-client</artifactId>
+		    <version>3.3.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>LatLonPoc</groupId>
+			<artifactId>LatLonPoc</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.7.9</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20070829</version>
+		</dependency>
+		
+		
+	</dependencies>
+</project>
